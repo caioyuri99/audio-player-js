@@ -24,10 +24,8 @@ function loadTags(file) {
 }
 
 function loadTrack(trackFile) {
-    const elemTrack = document.getElementById("track");
-
     const objectURL = URL.createObjectURL(trackFile);
-    elemTrack.src = objectURL;
+    audio.src = objectURL;
 
     loadTags(trackFile);
 }
@@ -40,27 +38,16 @@ function pictureToURL(picture) {
 }
 
 function playPause() {
-    const audio = document.getElementById("track");
-    const playPauseBtn = document.getElementById("play-pause");
-
     if (audio.paused) {
-        audio.play();
-
-        playPauseBtn.classList.toggle("bi-play-circle-fill");
-        playPauseBtn.classList.toggle("bi-pause-circle-fill");
+        audioPlay();
 
         return;
     }
 
-    audio.pause();
-
-    playPauseBtn.classList.toggle("bi-pause-circle-fill");
-    playPauseBtn.classList.toggle("bi-play-circle-fill");
+    audioPause();
 }
 
 function nextTrack() {
-    const audio = document.getElementById("track");
-
     previousStack.push(currentTrack);
 
     currentTrack++;
@@ -74,16 +61,10 @@ function nextTrack() {
     const previousBtn = document.getElementById("previous-track");
     previousBtn.disabled = false;
 
-    audio.play();
-
-    const playPauseBtn = document.getElementById("play-pause");
-    playPauseBtn.classList.remove("bi-play-circle-fill");
-    playPauseBtn.classList.add("bi-pause-circle-fill");
+    audioPlay();
 }
 
 function previousTrack() {
-    const audio = document.getElementById("track");
-
     currentTrack = previousStack.pop();
 
     if (previousStack.length === 0) {
@@ -93,16 +74,45 @@ function previousTrack() {
 
     loadTrack(trackList[currentTrack]);
 
+    audioPlay();
+}
+
+function updateProgressBar(event) {
+    const totalWidth = progressBar.offsetWidth;
+    const newOffsetX = event.clientX - progressBar.getBoundingClientRect().left;
+    let percentage = Math.max(
+        0,
+        Math.min(100, (newOffsetX / totalWidth) * 100)
+    );
+
+    progressBarBg.style.width = `${percentage}%`;
+    audio.currentTime = (percentage / 100) * audio.duration;
+}
+
+function audioPlay() {
     audio.play();
 
     const playPauseBtn = document.getElementById("play-pause");
+
     playPauseBtn.classList.remove("bi-play-circle-fill");
     playPauseBtn.classList.add("bi-pause-circle-fill");
+}
+
+function audioPause() {
+    audio.pause();
+
+    const playPauseBtn = document.getElementById("play-pause");
+
+    playPauseBtn.classList.remove("bi-pause-circle-fill");
+    playPauseBtn.classList.add("bi-play-circle-fill");
 }
 
 const trackList = [];
 let currentTrack = 0;
 const previousStack = [];
+const progressBar = document.getElementById("progress-bar");
+const progressBarBg = document.getElementById("progress-bar-bg");
+const audio = document.getElementById("track");
 
 document.getElementById("tracks").addEventListener(
     "change",
@@ -135,24 +145,26 @@ document
 document.getElementById("track").addEventListener("ended", nextTrack);
 
 document.getElementById("track").addEventListener("timeupdate", () => {
-    const audio = document.getElementById("track");
     const progressBarBg = document.getElementById("progress-bar-bg");
 
     const progress = (audio.currentTime / audio.duration) * 100;
     progressBarBg.style.width = `${progress}%`;
 });
 
-document.getElementById("progress-bar").addEventListener("click", e => {
-    const audio = document.getElementById("track");
-
+progressBar.addEventListener("mousedown", event => {
     if (audio.src === "") return;
 
-    const progressBar = document.getElementById("progress-bar");
+    audioPause();
+    updateProgressBar(event);
 
-    const rect = progressBar.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const width = rect.width;
-    const progress = (x / width) * 100;
+    document.addEventListener("mousemove", updateProgressBar);
 
-    audio.currentTime = (progress / 100) * audio.duration;
+    const mouseUpListener = () => {
+        document.removeEventListener("mousemove", updateProgressBar);
+        document.removeEventListener("mouseup", mouseUpListener);
+
+        audioPlay();
+    };
+
+    document.addEventListener("mouseup", mouseUpListener);
 });
