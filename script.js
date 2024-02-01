@@ -91,6 +91,7 @@ function updateProgressBar(event) {
 
 function audioPlay() {
     audio.play();
+    isPlaying = true;
 
     const playPauseBtn = document.getElementById("play-pause");
 
@@ -100,6 +101,7 @@ function audioPlay() {
 
 function audioPause() {
     audio.pause();
+    isPlaying = false;
 
     const playPauseBtn = document.getElementById("play-pause");
 
@@ -122,6 +124,7 @@ const previousStack = [];
 const progressBar = document.getElementById("progress-bar");
 const progressBarBg = document.getElementById("progress-bar-bg");
 const audio = document.getElementById("track");
+let isPlaying = false;
 
 document.getElementById("tracks").addEventListener(
     "change",
@@ -169,7 +172,7 @@ document.getElementById("track").addEventListener("timeupdate", () => {
 progressBar.addEventListener("mousedown", event => {
     if (audio.src === "") return;
 
-    audioPause();
+    audio.pause();
     updateProgressBar(event);
 
     document.addEventListener("mousemove", updateProgressBar);
@@ -178,7 +181,9 @@ progressBar.addEventListener("mousedown", event => {
         document.removeEventListener("mousemove", updateProgressBar);
         document.removeEventListener("mouseup", mouseUpListener);
 
-        audioPlay();
+        if (isPlaying) {
+            audio.play();
+        }
     };
 
     document.addEventListener("mouseup", mouseUpListener);
