@@ -16,7 +16,8 @@ body {
 }
 
 .control-btn {
-    height: fit-content;
+    height: 40px;
+    width: 40px;
     border: none;
     font-size: 40px;
     background: none;
@@ -98,7 +99,7 @@ body {
 }
 
 #progress-bar {
-    width: 30%;
+    width: 40%;
     background-color: #ffffff;
 }
 
