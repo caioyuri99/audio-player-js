@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background: linear-gradient(#1a1a1a, #a1a1a1);
+    background-repeat: no-repeat;
+}
+
+.info {
+    font-weight: normal;
+}
+
+.control-btn {
+    height: fit-content;
+    border: none;
+    font-size: 40px;
+    background: none;
+    cursor: pointer;
+}
+
+.control-btn:disabled {
+    cursor: not-allowed;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#file-manager {
+    position: absolute;
+    color: white;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+#tracks {
+    display: none;
+}
+
+#track-cover {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+#track-files {
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#track-files:hover {
+    background-color: #505050;
+    color: white;
+}
+
+#track-info {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#btn-row {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    padding-top: 15px;
+}
+
+#audio {
+    width: 50%;
+}
+
+#audio-player {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#progress-bar {
+    width: 30%;
+    background-color: #ffffff;
+}
+
+#ball-position {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 2px;
+    position: relative;
+    top: -5px;
+    left: 10px;
+    flex-shrink: 0;
+    border: 2px solid #000000;
+}
+
+#inside-ball {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+#progress-bar-bg {
+    background-color: darkcyan;
+    width: 0;
+    display: flex;
+    justify-content: end;
+}
