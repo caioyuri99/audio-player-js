@@ -128,3 +128,7 @@ body {
     display: flex;
     justify-content: end;
 }
+
+#timer {
+    margin-top: 10px;
+}

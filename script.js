@@ -107,6 +107,15 @@ function audioPause() {
     playPauseBtn.classList.add("bi-play-circle-fill");
 }
 
+function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+
+    return `${isNaN(minutes) ? "0" : minutes}:${
+        isNaN(seconds) ? "00" : String(seconds).padStart(2, "0")
+    }`;
+}
+
 const trackList = [];
 let currentTrack = 0;
 const previousStack = [];
@@ -149,6 +158,12 @@ document.getElementById("track").addEventListener("timeupdate", () => {
 
     const progress = (audio.currentTime / audio.duration) * 100;
     progressBarBg.style.width = `${progress}%`;
+
+    const currentTime = document.getElementById("current-time");
+    currentTime.innerText = formatTime(audio.currentTime);
+
+    const duration = document.getElementById("duration");
+    duration.innerText = formatTime(audio.duration);
 });
 
 progressBar.addEventListener("mousedown", event => {
