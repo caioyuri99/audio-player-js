@@ -2,7 +2,7 @@ const jsmediatags = window.jsmediatags;
 
 function loadTags(file) {
     jsmediatags.read(file, {
-        onSuccess: function (tag) {
+        onSuccess: tag => {
             const elemCover = document.getElementById("track-cover");
             const elemTitle = document.getElementById("track-title");
             const elemArtist = document.getElementById("track-artist");
@@ -17,7 +17,7 @@ function loadTags(file) {
             elemArtist.innerText = tags.artist ?? "Unknown Artist";
             elemAlbum.innerText = tags.album ?? "Unknown Album";
         },
-        onError: function (error) {
+        onError: error => {
             console.error(error);
         }
     });
