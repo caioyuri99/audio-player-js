@@ -7,8 +7,9 @@
 html,
 body {
     height: 100%;
-    background: linear-gradient(#1a1a1a, #a1a1a1);
+    background: linear-gradient(#1b1a1a, #696565);
     background-repeat: no-repeat;
+    color: #e7e7e7;
 }
 
 .info {
@@ -22,6 +23,7 @@ body {
     font-size: 40px;
     background: none;
     cursor: pointer;
+    color: #e7e7e7;
 }
 
 .control-btn:disabled {
@@ -100,7 +102,7 @@ body {
 
 #progress-bar {
     width: 40%;
-    background-color: #ffffff;
+    background-color: #1b1a1a;
 }
 
 #ball-position {
@@ -112,18 +114,18 @@ body {
     top: -5px;
     left: 10px;
     flex-shrink: 0;
-    border: 2px solid #000000;
+    border: 2px solid #e7e7e7;
 }
 
 #inside-ball {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #000000;
+    background-color: #e7e7e7;
 }
 
 #progress-bar-bg {
-    background-color: darkcyan;
+    background-color: #e7e7e7;
     width: 0;
     display: flex;
     justify-content: end;
