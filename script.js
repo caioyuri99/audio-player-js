@@ -22,14 +22,15 @@ function loadTags(file) {
 
             coverImg.onload = () => {
                 const color = colorThief.getColor(coverImg);
-                const rgbColor = `rgb(${color.join(",")})`;
+                rgbColor = `rgb(${color.join(",")})`;
+                secondColor = `rgb(${calcSecondGradientColor(color).join(
+                    ","
+                )})`;
 
-                document.body.style.background = `linear-gradient(${rgbColor}, rgb(${calcSecondGradientColor(
-                    color
-                ).join(",")}))`;
+                document.body.style.background = `linear-gradient(${rgbColor}, ${secondColor})`;
                 document.body.style.backgroundRepeat = "no-repeat";
 
-                const fontColor = isDark(color) ? "#e7e7e7" : "#000007";
+                fontColor = isDark(color) ? "#e7e7e7" : "#000007";
 
                 document.body.style.color = fontColor;
                 document.getElementById("previous-track").style.color =
@@ -46,6 +47,9 @@ function loadTags(file) {
 
                 document.getElementById("progress-bar").style.backgroundColor =
                     rgbColor;
+
+                trackFiles.style.backgroundColor = fontColor;
+                trackFiles.style.color = rgbColor;
             };
         },
         onError: error => {
@@ -60,6 +64,10 @@ const previousStack = [];
 const progressBarBg = document.getElementById("progress-bar-bg");
 const audio = document.getElementById("track");
 let isPlaying = false;
+let fontColor = "#e7e7e7";
+let rgbColor = "rgb(27, 26, 26)";
+let secondColor = "rgb(105, 101, 101)";
+const trackFiles = document.getElementById("track-files");
 
 document.getElementById("tracks").addEventListener(
     "change",
@@ -84,3 +92,13 @@ document.getElementById("track-files").addEventListener("click", () => {
 });
 
 document.getElementById("track").addEventListener("ended", nextTrack);
+
+trackFiles.addEventListener("mouseover", () => {
+    trackFiles.style.backgroundColor = secondColor;
+    trackFiles.style.color = fontColor;
+});
+
+trackFiles.addEventListener("mouseout", () => {
+    trackFiles.style.backgroundColor = fontColor;
+    trackFiles.style.color = rgbColor;
+});

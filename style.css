@@ -70,11 +70,6 @@ body {
     cursor: pointer;
 }
 
-#track-files:hover {
-    background-color: #505050;
-    color: white;
-}
-
 #track-info {
     height: 60%;
     display: flex;
