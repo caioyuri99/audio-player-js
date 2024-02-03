@@ -26,12 +26,13 @@ function nextTrack() {
 }
 
 function previousTrack() {
-    currentTrack = previousStack.pop();
+    if (audio.currentTime >= 3 || previousStack.length === 0) {
+        audio.currentTime = 0;
 
-    if (previousStack.length === 0) {
-        const previousBtn = document.getElementById("previous-track");
-        previousBtn.disabled = true;
+        return;
     }
+
+    currentTrack = previousStack.pop();
 
     loadTrack(trackList[currentTrack]);
 
