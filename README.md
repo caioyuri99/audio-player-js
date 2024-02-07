@@ -4,7 +4,7 @@ This is a simple audio player that can be used to play audio files in the browse
 
 ## Usage
 
-Open the `index.html` file in your browser and click the file button at the top of the page to select your audio files. Once you have selected your files, they will be played in the order that they were selected.
+Open the index.html file in your browser and either click the file button at the top of the page to select your audio files or simply drag and drop them onto the page. Once you have selected your files, they will be played in the order they were chosen.
 
 ## Features
 
