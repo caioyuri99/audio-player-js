@@ -48,12 +48,23 @@ body {
     border-radius: 5px;
 }
 
-#container {
+.draggable-bar-bg {
+    background-color: var(--font-color);
+    width: 0;
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    justify-content: end;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#container {
+    flex-direction: column;
+    height: 100%;
     text-align: center;
 }
 
@@ -113,8 +124,6 @@ body {
 
 #audio-player {
     width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 #progress-bar {
@@ -138,14 +147,6 @@ body {
     height: 100%;
     border-radius: 50%;
     background-color: var(--font-color);
-}
-
-#progress-bar-bg {
-    background-color: var(--font-color);
-    width: 0;
-    display: flex;
-    justify-content: end;
-    align-items: center;
 }
 
 #timer {
@@ -180,9 +181,6 @@ body {
     border-radius: 100px;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #drag-and-drop-feedback div h1 {
@@ -194,9 +192,6 @@ body {
     margin-top: 10px;
     width: 30%;
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #volume-bar {
@@ -205,21 +200,16 @@ body {
     margin-left: 10px;
 }
 
-#volume-bar-bg {
-    background-color: var(--font-color);
-    width: 0;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
 #volume-position-ball {
     width: 12.5px;
     height: 12.5px;
     border-radius: 50%;
-    padding: 2px;
     position: relative;
     left: 6.25px;
     flex-shrink: 0;
     background-color: var(--font-color);
+}
+
+#volume-bar-bg {
+    width: 100%;
 }

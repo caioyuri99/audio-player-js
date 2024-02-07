@@ -24,7 +24,7 @@
                 title="Input your tracks."
             ></button>
         </div>
-        <div id="container">
+        <div id="container" class="flex-center">
             <div id="track-info">
                 <img
                     src="/assets/default-cover.png"
@@ -35,9 +35,12 @@
                 <h2 id="track-artist" class="info">Please input your tracks</h2>
                 <h3 id="track-album" class="info">Please input your tracks</h3>
             </div>
-            <div id="audio-player">
+            <div id="audio-player" class="flex-center">
                 <div id="progress-bar" class="progress-bar">
-                    <div id="progress-bar-bg" class="progress-bar">
+                    <div
+                        id="progress-bar-bg"
+                        class="progress-bar draggable-bar-bg"
+                    >
                         <div id="ball-position">
                             <div id="inside-ball"></div>
                         </div>
@@ -67,17 +70,17 @@
                     disabled
                 ></button>
             </div>
-            <div id="volume-control">
+            <div id="volume-control" class="flex-center">
                 <div id="volume-icon" class="bi bi-volume-up-fill"></div>
                 <div id="volume-bar" class="volume-bar">
-                    <div id="volume-bar-bg" class="volume-bar">
+                    <div id="volume-bar-bg" class="volume-bar draggable-bar-bg">
                         <div id="volume-position-ball"></div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="drag-and-drop-mask"></div>
-        <div id="drag-and-drop-feedback">
+        <div id="drag-and-drop-feedback" class="flex-center11">
             <div>
                 <h1>Drop your tracks here</h1>
             </div>

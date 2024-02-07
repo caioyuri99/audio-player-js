@@ -108,4 +108,6 @@ document.getElementById("track-files").addEventListener("click", () => {
     document.getElementById("tracks").click();
 });
 
-document.getElementById("track").addEventListener("ended", nextTrack);
+document.getElementById("track").addEventListener("ended", () => {
+    if (isPlaying) nextTrack();
+});
