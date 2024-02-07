@@ -127,3 +127,19 @@ function isDark(color) {
 
     return brightness < 0.5;
 }
+
+function initPlayer(files) {
+    trackList.push(...files);
+
+    loadTrack(trackList[0]);
+
+    const playPauseBtn = document.getElementById("play-pause");
+    const nextBtn = document.getElementById("next-track");
+    const previousBtn = document.getElementById("previous-track");
+
+    playPauseBtn.disabled = false;
+    nextBtn.disabled = false;
+    previousBtn.disabled = false;
+
+    playPause();
+}

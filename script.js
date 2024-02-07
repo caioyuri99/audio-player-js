@@ -69,25 +69,53 @@ let rgbColor = "rgb(27, 26, 26)";
 let secondColor = "rgb(105, 101, 101)";
 const trackFiles = document.getElementById("track-files");
 
-document.getElementById("tracks").addEventListener(
-    "change",
-    e => {
-        trackList.push(...e.target.files);
+const dragAndDropMask = document.getElementById("drag-and-drop-mask");
 
-        loadTrack(trackList[0]);
+document.addEventListener("dragenter", e => {
+    e.preventDefault();
+    dragAndDropMask.style.display = "block";
+});
 
-        const playPauseBtn = document.getElementById("play-pause");
-        const nextBtn = document.getElementById("next-track");
-        const previousBtn = document.getElementById("previous-track");
+dragAndDropMask.addEventListener("dragover", e => {
+    e.preventDefault();
 
-        playPauseBtn.disabled = false;
-        nextBtn.disabled = false;
-        previousBtn.disabled = false;
+    const dragAndDropFeedback = document.getElementById(
+        "drag-and-drop-feedback"
+    );
 
-        playPause();
-    },
-    false
-);
+    dragAndDropFeedback.style.display = "flex";
+
+    if (dragAndDropFeedback.style.display !== "flex") {
+        dragAndDropFeedback.style.display = "flex";
+    }
+
+    e.dataTransfer.dropEffect = "copy";
+});
+
+dragAndDropMask.addEventListener("dragleave", e => {
+    const dragAndDropFeedback = document.getElementById(
+        "drag-and-drop-feedback"
+    );
+
+    dragAndDropFeedback.style.display = "none";
+});
+
+dragAndDropMask.addEventListener("drop", e => {
+    const dragAndDropMask = document.getElementById("drag-and-drop-mask");
+    const dragAndDropFeedback = document.getElementById(
+        "drag-and-drop-feedback"
+    );
+
+    dragAndDropMask.style.display = "none";
+    dragAndDropFeedback.style.display = "none";
+
+    e.preventDefault();
+    initPlayer(e.dataTransfer.files);
+});
+
+document
+    .getElementById("tracks")
+    .addEventListener("change", e => initPlayer(e.target.files));
 
 document.getElementById("track-files").addEventListener("click", () => {
     document.getElementById("tracks").click();
