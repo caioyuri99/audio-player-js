@@ -52,7 +52,6 @@ function loadTags(file) {
 const trackList = [];
 let currentTrack = 0;
 const previousStack = [];
-const progressBarBg = document.getElementById("progress-bar-bg");
 const audio = document.getElementById("track");
 let isPlaying = false;
 
@@ -84,6 +83,7 @@ dragAndDropMask.addEventListener("dragleave", e => {
         "drag-and-drop-feedback"
     );
 
+    dragAndDropMask.style.display = "none";
     dragAndDropFeedback.style.display = "none";
 });
 
