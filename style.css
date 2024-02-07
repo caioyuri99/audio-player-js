@@ -1,3 +1,9 @@
+:root {
+    --font-color: #e7e7e7;
+    --primary-color: #1b1a1a;
+    --secondary-color: #696565;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,9 +13,9 @@
 html,
 body {
     height: 100%;
-    background: linear-gradient(#1b1a1a, #696565);
+    background: linear-gradient(var(--primary-color), var(--secondary-color));
     background-repeat: no-repeat;
-    color: #e7e7e7;
+    color: var(--font-color);
 }
 
 .info {
@@ -23,7 +29,7 @@ body {
     font-size: 40px;
     background: none;
     cursor: pointer;
-    color: #e7e7e7;
+    color: var(--font-color);
 }
 
 .control-btn:disabled {
@@ -47,7 +53,7 @@ body {
 
 #file-manager {
     position: absolute;
-    color: white;
+    color: var(--font-color);
     padding-top: 10px;
     padding-left: 10px;
 }
@@ -69,6 +75,13 @@ body {
     font-size: 25px;
     border-radius: 5px;
     cursor: pointer;
+    background-color: var(--font-color);
+    color: var(--primary-color);
+}
+
+#track-files:hover {
+    background-color: var(--secondary-color);
+    color: var(--font-color);
 }
 
 #track-info {
@@ -98,7 +111,7 @@ body {
 
 #progress-bar {
     width: 40%;
-    background-color: #1b1a1a;
+    background-color: var(--primary-color);
 }
 
 #ball-position {
@@ -110,18 +123,18 @@ body {
     top: -5px;
     left: 10px;
     flex-shrink: 0;
-    border: 2px solid #e7e7e7;
+    border: 2px solid var(--font-color);
 }
 
 #inside-ball {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #e7e7e7;
+    background-color: var(--font-color);
 }
 
 #progress-bar-bg {
-    background-color: #e7e7e7;
+    background-color: var(--font-color);
     width: 0;
     display: flex;
     justify-content: end;
