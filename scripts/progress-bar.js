@@ -1,13 +1,49 @@
-function updateProgressBar(event) {
-    const totalWidth = progressBar.offsetWidth;
-    const newOffsetX = event.clientX - progressBar.getBoundingClientRect().left;
+function updateDraggableBar(event, draggableBar, draggableBarBg, barType) {
+    const totalWidth = draggableBar.offsetWidth;
+    const newOffsetX =
+        event.clientX - draggableBar.getBoundingClientRect().left;
     let percentage = Math.max(
         0,
         Math.min(100, (newOffsetX / totalWidth) * 100)
     );
 
-    progressBarBg.style.width = `${percentage}%`;
-    audio.currentTime = (percentage / 100) * audio.duration;
+    draggableBarBg.style.width = `${percentage}%`;
+
+    switch (barType) {
+        case "track":
+            audio.currentTime = (percentage / 100) * audio.duration;
+
+            return;
+
+        case "volume":
+            audio.volume = percentage / 100;
+
+            return;
+    }
+}
+
+function draggableBarHandler(event, draggableBar, draggableBarBg, barType) {
+    if (audio.src === "" && barType === "track") return;
+
+    if (barType === "track") audio.pause();
+
+    updateDraggableBar(event, draggableBar, draggableBarBg, barType);
+
+    const mousemoveListener = e =>
+        updateDraggableBar(e, draggableBar, draggableBarBg, barType);
+
+    document.addEventListener("mousemove", mousemoveListener);
+
+    const mouseUpListener = () => {
+        document.removeEventListener("mousemove", mousemoveListener);
+        document.removeEventListener("mouseup", mouseUpListener);
+
+        if (isPlaying && barType === "track") {
+            audio.play();
+        }
+    };
+
+    document.addEventListener("mouseup", mouseUpListener);
 }
 
 document.getElementById("track").addEventListener("timeupdate", () => {
@@ -24,23 +60,15 @@ document.getElementById("track").addEventListener("timeupdate", () => {
 });
 
 const progressBar = document.getElementById("progress-bar");
+const progressBarBg = document.getElementById("progress-bar-bg");
 
-progressBar.addEventListener("mousedown", event => {
-    if (audio.src === "") return;
+progressBar.addEventListener("mousedown", event =>
+    draggableBarHandler(event, progressBar, progressBarBg, "track")
+);
 
-    audio.pause();
-    updateProgressBar(event);
+const volumeBar = document.getElementById("volume-bar");
+const volumeBarBg = document.getElementById("volume-bar-bg");
 
-    document.addEventListener("mousemove", updateProgressBar);
-
-    const mouseUpListener = () => {
-        document.removeEventListener("mousemove", updateProgressBar);
-        document.removeEventListener("mouseup", mouseUpListener);
-
-        if (isPlaying) {
-            audio.play();
-        }
-    };
-
-    document.addEventListener("mouseup", mouseUpListener);
-});
+volumeBar.addEventListener("mousedown", event =>
+    draggableBarHandler(event, volumeBar, volumeBarBg, "volume")
+);

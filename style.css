@@ -8,6 +8,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 html,
@@ -42,6 +43,11 @@ body {
     border-radius: 5px;
 }
 
+.volume-bar {
+    height: 7.5px;
+    border-radius: 5px;
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -66,6 +72,8 @@ body {
     width: 300px;
     height: 300px;
     border-radius: 5px;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }
 
 #track-files {
@@ -120,7 +128,6 @@ body {
     border-radius: 50%;
     padding: 2px;
     position: relative;
-    top: -5px;
     left: 10px;
     flex-shrink: 0;
     border: 2px solid var(--font-color);
@@ -138,6 +145,7 @@ body {
     width: 0;
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 
 #timer {
@@ -180,4 +188,38 @@ body {
 #drag-and-drop-feedback div h1 {
     font-size: 50px;
     color: blue;
+}
+
+#volume-control {
+    margin-top: 10px;
+    width: 30%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#volume-bar {
+    width: 60%;
+    background-color: var(--primary-color);
+    margin-left: 10px;
+}
+
+#volume-bar-bg {
+    background-color: var(--font-color);
+    width: 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#volume-position-ball {
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 50%;
+    padding: 2px;
+    position: relative;
+    left: 6.25px;
+    flex-shrink: 0;
+    background-color: var(--font-color);
 }
