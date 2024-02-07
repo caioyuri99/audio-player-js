@@ -213,3 +213,7 @@ body {
 #volume-bar-bg {
     width: 100%;
 }
+
+#volume-icon {
+    cursor: pointer;
+}

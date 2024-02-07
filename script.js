@@ -111,3 +111,5 @@ document.getElementById("track-files").addEventListener("click", () => {
 document.getElementById("track").addEventListener("ended", () => {
     if (isPlaying) nextTrack();
 });
+
+document.getElementById("mute").addEventListener("change", muteUnmute);

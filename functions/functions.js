@@ -143,3 +143,41 @@ function initPlayer(files) {
 
     playPause();
 }
+
+function mute() {
+    const mute = document.getElementById("mute");
+    mute.checked = true;
+
+    audio.muted = true;
+
+    const volumeIcon = document.getElementById("volume-icon");
+
+    volumeIcon.classList.remove("bi-volume-up-fill");
+    volumeIcon.classList.add("bi-volume-mute-fill");
+
+    volumeBarBg.style.width = 0;
+}
+
+function unmute() {
+    const mute = document.getElementById("mute");
+    mute.checked = false;
+
+    audio.muted = false;
+
+    const volumeIcon = document.getElementById("volume-icon");
+
+    volumeIcon.classList.remove("bi-volume-mute-fill");
+    volumeIcon.classList.add("bi-volume-up-fill");
+
+    volumeBarBg.style.width = `${audio.volume * 100}%`;
+}
+
+function muteUnmute() {
+    if (audio.muted) {
+        unmute();
+
+        return;
+    }
+
+    mute();
+}

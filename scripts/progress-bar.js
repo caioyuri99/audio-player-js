@@ -16,9 +16,15 @@ function updateDraggableBar(event, draggableBar, draggableBarBg, barType) {
             return;
 
         case "volume":
-            audio.volume = percentage / 100;
+            audio.volume = (percentage / 100).toFixed(2);
 
-            return;
+            if (audio.volume == 0) {
+                mute();
+
+                return;
+            }
+
+            unmute();
     }
 }
 
@@ -73,11 +79,22 @@ volumeBar.addEventListener("mousedown", event =>
     draggableBarHandler(event, volumeBar, volumeBarBg, "volume")
 );
 
-volumeBar.addEventListener("wheel", event => {
+document.getElementById("volume-control").addEventListener("wheel", event => {
     event.preventDefault();
+
+    if (audio.muted) audio.volume = 0;
+
     audio.volume = Math.max(
         0,
         Math.min((audio.volume - event.deltaY / 1000).toFixed(2), 1)
     );
     volumeBarBg.style.width = `${audio.volume * 100}%`;
+
+    if (audio.volume == 0) {
+        mute();
+
+        return;
+    }
+
+    unmute();
 });
